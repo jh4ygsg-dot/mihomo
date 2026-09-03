@@ -1,0 +1,54 @@
+mode: rule
+log-level: warning
+ipv6: false
+
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+
+tun:
+  enable: true
+  stack: mixed
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+  dns-hijack:
+  - any:53
+  - tcp://any:53
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  default-nameserver:
+  - tls://223.5.5.5
+  fake-ip-filter:
+  - GEOSITE,private
+  nameserver-policy:
+    "geosite:private": system
+    "geosite:cn": https://dns.alidns.com/dns-query
+  nameserver:
+  - "https://1.1.1.1/dns-query#anytls-server"
+  proxy-server-nameserver:
+  - https://dns.alidns.com/dns-query
+
+proxies:
+- name: "anytls-server"
+  type: anytls
+  server: YOUR_VPS_DOMAIN
+  port: 443
+  password: YOUR_ANYTLS_PASSWORD
+  client-fingerprint: chrome
+  udp: true
+  sni: YOUR_VPS_DOMAIN
+  skip-cert-verify: false
+
+rules:
+- GEOSITE,private,DIRECT
+- GEOIP,lan,DIRECT,no-resolve
+- GEOSITE,cn,DIRECT
+- GEOIP,cn,DIRECT,no-resolve
+- MATCH,anytls-server

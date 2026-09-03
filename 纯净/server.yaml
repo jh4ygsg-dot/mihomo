@@ -1,0 +1,16 @@
+mode: rule
+log-level: warning
+ipv6: false
+
+listeners:
+- name: anytls
+  type: anytls
+  listen: 0.0.0.0
+  port: 443
+  users:
+    username1: YOUR_ANYTLS_PASSWORD
+  certificate: /etc/mihomo/fullchain.pem
+  private-key: /etc/mihomo/private-key.pem
+
+rules:
+- MATCH,DIRECT

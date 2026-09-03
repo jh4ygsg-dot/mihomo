@@ -1,0 +1,33 @@
+mode: rule
+log-level: warning
+ipv6: false
+
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+
+listeners:
+- name: anytls
+  type: anytls
+  listen: 0.0.0.0
+  port: 443
+  users:
+    username1: YOUR_ANYTLS_PASSWORD
+  certificate: /etc/mihomo/fullchain.pem
+  private-key: /etc/mihomo/private-key.pem
+
+proxies:
+- name: "warp-cli"
+  type: socks5
+  server: 127.0.0.1
+  port: 40000
+
+rules:
+- GEOSITE,google,warp-cli
+- GEOIP,google,warp-cli,no-resolve
+- MATCH,DIRECT
