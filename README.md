@@ -2,7 +2,7 @@
 
 ## 配置目录
 
-- `客户端/config.yaml`：通用 Windows TUN 客户端配置。使用前将两处 `YOUR_VPS_DOMAIN` 替换为对应 VPS 域名。
+- `客户端/config.yaml`：通用 Windows TUN 客户端配置。复制 `proxies` 中的节点模板并分别填写 VPS 域名和节点名称；“节点选择”策略组会自动收纳所有节点并记住手动选择。
 - `送中/server.yaml`：Google 流量通过 VPS 本机 `127.0.0.1:40000` SOCKS5 代理，其余流量直连。
 - `纯净/server.yaml`：服务端全部流量直接使用 VPS 本地网络。
 
