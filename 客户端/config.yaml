@@ -48,6 +48,13 @@ proxies:
   udp: true
   sni: YOUR_VPS_DOMAIN
   skip-cert-verify: false
+- name: "hy2"
+  type: hysteria2
+  server: YOUR_VPS_DOMAIN
+  port: 443
+  password: YOUR_HY2_PASSWORD
+  sni: YOUR_VPS_DOMAIN
+  skip-cert-verify: false
 
 proxy-groups:
 - name: "节点选择"

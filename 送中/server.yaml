@@ -20,6 +20,15 @@ listeners:
     username1: YOUR_ANYTLS_PASSWORD
   certificate: /etc/mihomo/fullchain.pem
   private-key: /etc/mihomo/private-key.pem
+- name: hy2
+  type: hysteria2
+  listen: 0.0.0.0
+  port: 443
+  users:
+    hy2: YOUR_HY2_PASSWORD
+  ignore-client-bandwidth: true
+  certificate: /etc/mihomo/fullchain.pem
+  private-key: /etc/mihomo/private-key.pem
 
 proxies:
 - name: "warp-cli"
