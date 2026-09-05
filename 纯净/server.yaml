@@ -1,5 +1,5 @@
 mode: rule
-log-level: warning
+log-level: info
 ipv6: false
 
 listeners:
@@ -17,7 +17,6 @@ listeners:
   port: 443
   users:
     hy2: YOUR_HY2_PASSWORD
-  ignore-client-bandwidth: true
   certificate: /etc/mihomo/fullchain.pem
   private-key: /etc/mihomo/private-key.pem
 
