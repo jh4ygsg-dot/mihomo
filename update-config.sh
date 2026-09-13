@@ -96,6 +96,7 @@ yaml_password=${yaml_password//\"/\\\"}
 render_config() {
   local source_path=$1
   local target_path=$2
+  local add_domain_to_node_name=${3:-false}
   local config_line
 
   while IFS= read -r config_line || [[ -n ${config_line} ]]; do
@@ -104,6 +105,12 @@ render_config() {
     fi
     if [[ ${config_line} == *YOUR_VPS_DOMAIN* ]]; then
       config_line="${config_line%%YOUR_VPS_DOMAIN*}${vps_domain}${config_line#*YOUR_VPS_DOMAIN}"
+    fi
+    if [[ ${add_domain_to_node_name} == true ]]; then
+      case ${config_line} in
+        '- name: "vless"') config_line="- name: \"vless-${vps_domain}\"" ;;
+        '- name: "hy2"') config_line="- name: \"hy2-${vps_domain}\"" ;;
+      esac
     fi
     printf '%s\n' "${config_line}"
   done < "${source_path}" > "${target_path}"
@@ -116,7 +123,7 @@ if ! grep -q 'YOUR_PASSWORD' "${downloaded_client_config}" || ! grep -q 'YOUR_VP
   exit 1
 fi
 
-render_config "${downloaded_client_config}" "${temp_client_config}"
+render_config "${downloaded_client_config}" "${temp_client_config}" true
 
 if grep -qE 'YOUR_PASSWORD|YOUR_VPS_DOMAIN' "${temp_client_config}"; then
   echo "错误：客户端配置仍包含未替换的占位符。" >&2

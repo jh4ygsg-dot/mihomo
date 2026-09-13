@@ -39,7 +39,7 @@ dns:
   - https://dns.alidns.com/dns-query
 
 proxies:
-- name: "vless-YOUR_VPS_DOMAIN"
+- name: "vless"
   type: vless
   server: YOUR_VPS_DOMAIN
   port: 443
@@ -52,7 +52,7 @@ proxies:
   servername: YOUR_VPS_DOMAIN
   skip-cert-verify: false
   network: tcp
-- name: "hy2-YOUR_VPS_DOMAIN"
+- name: "hy2"
   type: hysteria2
   server: YOUR_VPS_DOMAIN
   port: 443
