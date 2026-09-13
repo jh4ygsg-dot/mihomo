@@ -10,7 +10,7 @@
 
 ## 在 VPS 上交互式更新配置
 
-`update-config.sh` 会让用户选择“纯净”或“送中”配置，从 GitHub `main` 分支下载对应的最新文件，并用输入的密码替换 `YOUR_PASSWORD`。随后脚本会询问 VPS 域名，生成已经填充密码和域名的客户端配置。脚本会在覆盖前运行 Mihomo 服务端配置校验，并把现有 `/etc/mihomo/config.yaml` 备份为带时间戳的文件。
+`update-config.sh` 会让用户选择“纯净”或“送中”配置，从 GitHub `main` 分支下载对应的最新文件，并用输入的密码替换 `YOUR_PASSWORD`。随后脚本会询问 VPS 域名，生成已经填充密码和域名的客户端配置；节点名会采用 `vless-域名` 和 `hy2-域名` 的格式。脚本会在覆盖前运行 Mihomo 服务端配置校验，并把现有 `/etc/mihomo/config.yaml` 备份为带时间戳的文件。
 
 在 VPS 上执行：
 

@@ -92,8 +92,6 @@ fi
 # 将输入编码为 YAML 双引号字符串，支持空格、引号、反斜杠等字符。
 yaml_password=${proxy_password//\\/\\\\}
 yaml_password=${yaml_password//\"/\\\"}
-yaml_domain=${vps_domain//\\/\\\\}
-yaml_domain=${yaml_domain//\"/\\\"}
 
 render_config() {
   local source_path=$1
@@ -105,7 +103,7 @@ render_config() {
       config_line="${config_line%%YOUR_PASSWORD*}\"${yaml_password}\"${config_line#*YOUR_PASSWORD}"
     fi
     if [[ ${config_line} == *YOUR_VPS_DOMAIN* ]]; then
-      config_line="${config_line%%YOUR_VPS_DOMAIN*}\"${yaml_domain}\"${config_line#*YOUR_VPS_DOMAIN}"
+      config_line="${config_line%%YOUR_VPS_DOMAIN*}${vps_domain}${config_line#*YOUR_VPS_DOMAIN}"
     fi
     printf '%s\n' "${config_line}"
   done < "${source_path}" > "${target_path}"
