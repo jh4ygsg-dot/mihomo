@@ -56,7 +56,7 @@ proxies:
   type: hysteria2
   server: YOUR_VPS_DOMAIN
   port: 443
-  password: YOUR_HY2_PASSWORD
+  password: YOUR_PASSWORD
   sni: YOUR_VPS_DOMAIN
   skip-cert-verify: false
 
