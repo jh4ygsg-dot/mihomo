@@ -12,12 +12,14 @@ geox-url:
   asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
 
 listeners:
-- name: anytls
-  type: anytls
+- name: vless
+  type: vless
   listen: 0.0.0.0
   port: 443
   users:
-    username1: YOUR_ANYTLS_PASSWORD
+  - username: 1
+    uuid: YOUR_PASSWORD
+    flow: xtls-rprx-vision
   certificate: /etc/mihomo/fullchain.pem
   private-key: /etc/mihomo/private-key.pem
 - name: hy2

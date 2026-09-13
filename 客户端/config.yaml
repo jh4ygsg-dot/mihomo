@@ -39,15 +39,19 @@ dns:
   - https://dns.alidns.com/dns-query
 
 proxies:
-- name: "anytls-server"
-  type: anytls
+- name: "vless"
+  type: vless
   server: YOUR_VPS_DOMAIN
   port: 443
-  password: YOUR_ANYTLS_PASSWORD
+  uuid: YOUR_PASSWORD
+  flow: xtls-rprx-vision
   client-fingerprint: chrome
+  packet-encoding: xudp
   udp: true
-  sni: YOUR_VPS_DOMAIN
+  tls: true
+  servername: YOUR_VPS_DOMAIN
   skip-cert-verify: false
+  network: tcp
 - name: "hy2"
   type: hysteria2
   server: YOUR_VPS_DOMAIN
