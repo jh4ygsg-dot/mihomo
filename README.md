@@ -10,7 +10,7 @@
 
 ## 在 VPS 上交互式更新配置
 
-`update-config.sh` 会让用户选择“纯净”或“送中”配置，从 GitHub `main` 分支下载对应的最新文件，并用输入的密码替换 `YOUR_PASSWORD`。脚本会在覆盖前运行 Mihomo 配置校验，并把现有 `/etc/mihomo/config.yaml` 备份为带时间戳的文件。
+`update-config.sh` 会让用户选择“纯净”或“送中”配置，从 GitHub `main` 分支下载对应的最新文件，并用输入的密码替换 `YOUR_PASSWORD`。随后脚本会询问 VPS 域名，生成已经填充密码和域名的客户端配置。脚本会在覆盖前运行 Mihomo 服务端配置校验，并把现有 `/etc/mihomo/config.yaml` 备份为带时间戳的文件。
 
 在 VPS 上执行：
 
@@ -21,7 +21,7 @@ chmod +x /tmp/update-mihomo-config.sh
 sudo /tmp/update-mihomo-config.sh
 ```
 
-脚本需要 VPS 已安装 `curl`、`mihomo` 和 systemd。输入内容不会回显。选择“送中”前，还应确保本机 `127.0.0.1:40000` 已有可用的 SOCKS5 服务。
+脚本需要 VPS 已安装 `curl`、`mihomo` 和 systemd。密码输入不会回显。生成的客户端配置会以仅 root 可读的权限保存到 `/root/mihomo-client.yaml`，并在脚本最后输出到终端。选择“送中”前，还应确保本机 `127.0.0.1:40000` 已有可用的 SOCKS5 服务。
 
 ## 使用 acme.sh 申请证书
 
