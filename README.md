@@ -6,7 +6,22 @@
 - `送中/server.yaml`：Google 流量通过 VPS 本机 `127.0.0.1:40000` SOCKS5 代理，其余流量直连。
 - `纯净/server.yaml`：服务端全部流量直接使用 VPS 本地网络。
 
-客户端与服务端配置中的 AnyTLS 密码必须保持一致，并应替换为独立生成的随机强密码。
+客户端与服务端配置中的 `YOUR_PASSWORD` 必须替换为同一个非空密码。该值同时用作 VLESS 的 `uuid` 字段和 Hysteria2 密码；Mihomo 允许这里使用普通字符串，不要求标准 UUID 格式。
+
+## 在 VPS 上交互式更新配置
+
+`update-config.sh` 会让用户选择“纯净”或“送中”配置，从 GitHub `main` 分支下载对应的最新文件，并用输入的密码替换 `YOUR_PASSWORD`。脚本会在覆盖前运行 Mihomo 配置校验，并把现有 `/etc/mihomo/config.yaml` 备份为带时间戳的文件。
+
+在 VPS 上执行：
+
+```bash
+curl -fsSLo /tmp/update-mihomo-config.sh \
+  https://raw.githubusercontent.com/jh4ygsg-dot/mihomo/main/update-config.sh
+chmod +x /tmp/update-mihomo-config.sh
+sudo /tmp/update-mihomo-config.sh
+```
+
+脚本需要 VPS 已安装 `curl`、`mihomo` 和 systemd。输入内容不会回显。选择“送中”前，还应确保本机 `127.0.0.1:40000` 已有可用的 SOCKS5 服务。
 
 ## 使用 acme.sh 申请证书
 

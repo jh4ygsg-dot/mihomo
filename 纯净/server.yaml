@@ -18,7 +18,7 @@ listeners:
   listen: 0.0.0.0
   port: 443
   users:
-    hy2: YOUR_HY2_PASSWORD
+    hy2: YOUR_PASSWORD
   certificate: /etc/mihomo/fullchain.pem
   private-key: /etc/mihomo/private-key.pem
 
